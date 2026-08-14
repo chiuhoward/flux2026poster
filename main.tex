@@ -8,7 +8,7 @@
 % Packages
 % ====================
 
-\usepackage[size=custom,width=36,height=48,scale=0.5]{beamerposter}
+\usepackage[size=custom,width=46,height=36,scale=0.5]{beamerposter}
 \usetheme{gemini}
 \usecolortheme{stanford}
 \usepackage{graphicx}
@@ -27,6 +27,11 @@
 \addbibresource{poster.bib} % Adjust the filename as needed
 \usepackage{amssymb}
 
+% Banner colour options (from the upstream template README):
+%   \setbeamercolor{headline}{bg=paloaltogreen,fg=white}  % white text, Palo Alto green banner
+%   \setbeamercolor{headline}{bg=white,fg=cardinalred}    % cardinal red text, white banner
+%   \setbeamercolor{headline}{bg=cardinalred,fg=white}    % white text, cardinal red banner
+%   \setbeamercolor{headline}{bg=coolgray,fg=white}       % white text, cool grey banner
 \setbeamercolor{headline}{bg=cardinalred,fg=white}
 \setbeamercolor{footline}{bg=footergray,fg=darkcardinal}
 
@@ -97,15 +102,14 @@
 \newcommand{\separatorcolumn}{\begin{column}{\sepwidth}\end{column}}
 
 
-\title{How Did a Strength-Based Video-Coaching Intervention Alter Parental Neurocognitive Mechanisms? Evidence From RCT \newline Studies in Low-Income, High-Adversity Contexts}
+\title{Dimensions of Early Enrichment (DEE): Bayesian Exploratory Factor Structure of Caregiving and Environmental Indicators and Associations With Early Development in the HBCD Study}
 
 
-\author{\fontsize{16}{18}\selectfont Howard Chiu \inst{1} \and Nicole Giuliani \inst{2} \and Sihong Liu \inst{3} \and Phil Fisher \inst{3} }
+\author{\fontsize{16}{18}\selectfont Howard Chiu \inst{1} \and Monica Ellwood-Lowe \inst{1} \and Philip Fisher \inst{1,2}}
 
 \institute[shortinst]{%
-  \inst{1} Graduate School of Education, Stanford University, Stanford, CA, USA \\ 
-  \inst{2} College of Education, University of Oregon, Eugene, OR, USA \\ 
-  \inst{3} Stanford Center on Early Childhood, Stanford University, Stanford, CA, USA
+  \inst{1} Graduate School of Education, Stanford University, Stanford, CA, USA \\
+  \inst{2} Stanford Center on Early Childhood, Stanford University, Stanford, CA, USA
 }
 
 % ====================
@@ -113,8 +117,8 @@
 % ====================
 
 \footercontent{
-  \href{chiuhoward.github.io}{chiuhoward.github.io} \hfill
-  Thank you to all the families that made this research possible! \hfill
+  \href{https://osf.io/9c4kt/overview}{OSF Preregistration: osf.io/9c4kt} \hfill
+  Data provided by the HBCD Study, a consortium supported by NIH \hfill
   \href{mailto:howardchiu@stanford.edu}{howardchiu@stanford.edu}}
 
 
@@ -137,11 +141,7 @@
     {\includegraphics[width=36.9cm]{stanford_logos/stanford-line2-10-white.png}};
   \end{tikzpicture}
 
-  \begin{tikzpicture}[remember picture,overlay]
-    \node [anchor=north west, inner sep=3cm, align=center] at ([xshift=-1.25cm,yshift=-2.2cm]current page.north west)
-    {\includegraphics[width=2.25cm]{osf-qr.png}\\[2mm]
-     \small OSF Preregistration};
-\end{tikzpicture}
+  % TODO: add an OSF QR code node here (top-left of headline) if wanted
 }
 
 \begin{frame}[t]
@@ -149,84 +149,88 @@
 \begin{columns}[t]
 \begin{column}{\textwidth}
   \vspace{-0.5cm}
-  \begin{block}{Filming Interactions to Nurture Development (FIND) Intervention}
+  \begin{block}{What is DEE, and what does it ask?}
     \begin{columns}[t]
       \begin{column}{0.48\textwidth}
-              \vspace{-0.4cm}  % Reduce space after title
-          \begin{block}{Parent coaching focuses on Serve and Return interactions}
-        \begin{figure}[ht]
-          \centering
-          \includegraphics[clip, width=0.75\textwidth]{find.png}
-          \label{fig:find}
-        \end{figure}
-        \vspace{-1cm}
-        \begin{figure}[ht]
-          \centering
-          \includegraphics[clip, width=0.85\textwidth]{servereturn.png}
-          \label{fig:servereturn}
-          \\[0.5em]
-          \vspace{-0.5cm}
-          {\tiny Source: \url{https://developingchild.harvard.edu/resources/briefs/5-steps-for-brain-building-serve-and-return/}}
-        \label{fig:servereturn}
-       \end{figure}
-             \end{block}
-        \vspace{-0.5cm}
-        FIND is a 10-session, strengths-based, video-coaching intervention that aims to reinforce naturally occurring, developmentally supportive interactions (known as serve-and-return). FIND has previously been used in homes, child welfare supervised visitation, center- and home-based child care, and pediatric care settings.
+        \vspace{-0.4cm}
+        \begin{block}{Why study this?}
+          \vspace{-0.1cm}
+          The HEALthy Brain and Child Development (HBCD) Study is a multisite,
+          prospective longitudinal cohort recruited across 27 U.S. sites,
+          designed to characterize brain, cognitive, and behavioral
+          development from the prenatal period through early childhood
+          \supercite{nelson2024hbcd}. We use HBCD Data Release 2.0 phenotype
+          data to ask how caregiving and environmental context relate to
+          early child development.
 
+          \vspace{0.2cm}
+          Brieant et al. \supercite{brieant2023characterizing} extracted ten
+          adversity dimensions from a risk-only item battery in ABCD, later
+          used by Beck et al. \supercite{beck2024dimensions} to predict
+          brain-age gap. Neither study included any promotive or protective
+          measure (caregiver warmth, cognitive stimulation, breastfeeding),
+          so neither could test whether promotive and adversity content
+          separate into distinct dimensions or collapse into a single
+          bipolar continuum. \textbf{DEE puts both kinds of indicators in
+          the same factor-analytic input matrix} and lets a genuinely
+          Bayesian exploratory method \supercite{conti2014bayesian} decide
+          -- the number of active factors and the item-to-factor allocation
+          are inferred from the model's own posterior, never fixed by the
+          analyst.
+        \end{block}
       \end{column}
 
       \begin{column}{0.48\textwidth}
-              \vspace{-0.4cm}  % Reduce space after title
-    \begin{block}{Changes in parent brain mediate improvement in child outcomes}
-        \begin{figure}[ht]
-          \centering
-          \includegraphics[clip, width=0.75\textwidth]{model.png}
-          \label{fig:model}
-        \end{figure}
-        \vspace{-0.25cm}
-        In earlier studies, FIND led to significant improvements in parent self-efficacy\supercite{liuImprovingCaregiverSelfEfficacy2021} and executive function\supercite{giulianiPreliminaryStudyInvestigating2019} among middle-income families. Regions of Interest (ROIs) previously identified include clusters in the left inferior frontal gyrus (IFG) and insula for the Correct Stop > Correct Go contrast of the Stop-Signal Task.
+        \vspace{-0.4cm}
+        \begin{block}{Two-stage design: discover, then confirm}
+          \vspace{-0.1cm}
+          Each developmental window (TP1: prenatal-9mo; TP2: 9-17mo) is
+          modeled independently. Within each window, subjects are split
+          once into an 80\% discovery sample (further divided into 5
+          cross-validation folds, 4 MCMC chains per fold) and a permanent
+          20\% confirmation holdout never touched during discovery
+          \supercite{cudeckbrowne1983crossvalidation}. Rolling HBCD
+          enrollment means TP2's usable N is far smaller than TP1's:
+
+          \begin{center}
+          \begin{tikzpicture}[node distance=2cm, auto]
+            \tikzstyle{tp1block} = [rectangle, draw, fill=cardinalred,
+              text width=4.4em, text centered, rounded corners,
+              minimum height=3.4em, font=\small, text=white]
+            \tikzstyle{tp2block} = [rectangle, draw, fill=paloaltogreen,
+              text width=4.4em, text centered, rounded corners,
+              minimum height=3.4em, font=\small, text=white]
+            \tikzstyle{arrow} = [draw, thick, -latex']
+            \tikzstyle{lbl} = [font=\footnotesize, text centered]
+
+            \node [tp1block] (tp1_n) {\textbf{\normalsize N=4{,}117}};
+            \node [tp1block, right of=tp1_n, xshift=2.9cm] (tp1_disc) {\textbf{\normalsize Discovery\\ n=3{,}304}};
+            \node [tp1block, right of=tp1_disc, xshift=3.1cm] (tp1_hold) {\textbf{\normalsize Holdout\\ n=812}};
+
+            \node [tp2block, below of=tp1_n, yshift=0.4cm] (tp2_n) {\textbf{\normalsize N=681}};
+            \node [tp2block, right of=tp2_n, xshift=2.9cm] (tp2_disc) {\textbf{\normalsize Discovery\\ n=557}};
+            \node [tp2block, right of=tp2_disc, xshift=3.1cm] (tp2_hold) {\textbf{\normalsize Holdout\\ n=123}};
+
+            \draw [arrow] (tp1_n) -- (tp1_disc) node [midway, above, lbl] {80\%};
+            \draw [arrow] (tp1_disc) -- (tp1_hold) node [midway, above, lbl] {5-fold $\times$ 4-chain BEFA};
+            \draw [arrow] (tp2_n) -- (tp2_disc) node [midway, above, lbl] {80\%};
+            \draw [arrow] (tp2_disc) -- (tp2_hold) node [midway, above, lbl] {5-fold $\times$ 4-chain BEFA};
+
+            \node [font=\bfseries, left of=tp1_n, xshift=-1.4cm] {TP1};
+            \node [font=\bfseries, left of=tp2_n, xshift=-1.4cm] {TP2};
+          \end{tikzpicture}
+          \end{center}
+          \vspace{-0.1cm}
+          17 candidate items at TP1, 15 at TP2 (caregiver-child relationship,
+          breastfeeding, neighborhood/housing, discrimination, financial
+          hardship, and language/cognitive stimulation measures).
+          \textbf{H1} asks how many factors best describe this structure and
+          whether it reproduces across folds and generalizes to the holdout;
+          \textbf{H2}/\textbf{H3} ask whether promotive-dominant recovered
+          dimensions predict more favorable outcomes, and whether that
+          association is protectively moderated by adversity-dominant
+          dimensions.
         \end{block}
-
-    \begin{block}{Participants included as Intent-to-Treat, but neuroimaging pre- and post-intervention was made optional due to COVID.}
-
-        \begin{tikzpicture}[node distance=2cm, auto]
-            % Define styles
-            \tikzstyle{findblock} = [rectangle, draw, fill=cardinalred, 
-            text width=4em, text centered, rounded corners, minimum height=3em, font=\small, text=white]
-            \tikzstyle{htpblock} = [rectangle, draw, fill=paloaltogreen, 
-            text width=4em, text centered, rounded corners, minimum height=3em, font=\small, text=white]
-            \tikzstyle{timeline} = [draw, thick, -latex']
-            \tikzstyle{wave} = [font=\normalsize, text centered]
-            \tikzstyle{label} = [font=\footnotesize, text centered]
-            
-            % FIND timeline (top)
-            \node [findblock] (find_w1) {\textbf{\normalsize n = 55}};
-            \node [findblock, right of=find_w1, xshift=2.5cm] (find_w2) {\textbf{\normalsize n = 44}};
-            \node [findblock, right of=find_w2, xshift=3.5cm] (find_w3) {\textbf{\normalsize n = 36}};
-            
-            % HTP timeline (bottom)
-            \node [htpblock, below of=find_w1, yshift=0.5cm] (htp_w1) {\textbf{\normalsize n = 59}};
-            \node [htpblock, right of=htp_w1, xshift=2.5cm] (htp_w2) {\textbf{\normalsize n = 48}};
-            \node [htpblock, right of=htp_w2, xshift=3.5cm] (htp_w3) {\textbf{\normalsize n = 41}};
-            
-            % Timeline arrows
-            \draw [timeline] (find_w1) -- (find_w2) node [midway, above, label, align=center] {\normalsize Intervention \\ \normalsize (10 weeks)};
-            \draw [timeline] (find_w2) -- (find_w3) node [midway, above, label] {\normalsize 6 months};
-            \draw [timeline] (htp_w1) -- (htp_w2);
-            \draw [timeline] (htp_w2) -- (htp_w3);
-            
-            % Timeline labels
-            \node [wave, below of=htp_w1, yshift=1.0cm] {Wave 1};
-            \node [wave, below of=htp_w2, yshift=1.0cm] {Wave 2};
-            \node [wave, below of=htp_w3, yshift=1.0cm] {Wave 3};
-            
-            % Group labels
-            \node [font=\bfseries, left of=find_w1, xshift=-1.5cm] {FIND};
-            \node [font=\bfseries, left of=htp_w1, xshift=-1.5cm, text width=3.4cm, align=center] {HTP \\ (Active Control)};
-        
-        \end{tikzpicture}
-
-          \end{block}
       \end{column}
     \end{columns}
   \end{block}
@@ -234,139 +238,175 @@
 \end{columns}
 
 % Bottom half - three columns
-\vspace{-0.5cm} % Adjust this value to set the separation between top and bottom halves
+\vspace{-0.5cm}
 \begin{columns}[t]
 \separatorcolumn
 
 \begin{column}{\colwidth}
-  \begin{block}{FIND improves self-reported parent outcomes (n = 114).}
-        
-    Consistent with previous pilot and RCT studies, FIND intervention:
-    \vspace{-0.3cm}
-    \begin{itemize}
-        \item reduced parent fatigue post-intervention (time by group effect: B = -1.29, SE = .57, p = .024) and after 6 months (B = -1.35, SE = .60, p = .027)
-        \item marginally increased caregiver self-efficacy post-intervention (time by group effect: B = 1.48, SE = .83, p = .076) and after 6 months (B = 1.53, SE = .89, p = .087)
-        \item marginally decreased parenting stress after 6 months (B = -2.19, SE = 1.11, p = .051)
-    \end{itemize}
-    \vspace{-0.5cm}
-    \begin{figure}[ht]
-        \centering
-        \begin{tikzpicture}
-            \node[anchor=south west,inner sep=0] (image1) at (0,0) {\includegraphics[width=0.625\textwidth]{fatigue.png}};
-            \node[anchor=south west,inner sep=0] (image2) at (0.425\textwidth,0cm) {\includegraphics[width=0.625\textwidth]{selfeff.png}};
-        \end{tikzpicture}
-        {\small FIND intervention effects on parent fatigue (left) and self-efficacy (right); parenting stress not shown.}
-        \label{fig:combined}
-    \end{figure} 
-    
+  \begin{block}{H1: Structural Discovery}
+    \vspace{-0.2cm}
+    Neither window's recovered structure met the preregistered qualitative
+    bar (broadly fold-stable, and fitting acceptably on the holdout):
+
+    \begin{table}[ht]
+      \centering
+      \fontsize{9}{11}\selectfont
+      \begin{tabularx}{\textwidth}{l c c c c}
+        \toprule
+        \textbf{Window} & \textbf{Factors (M)} & \textbf{Gate: folds pass} & \textbf{CFI (holdout)} & \textbf{RMSEA} \\
+        \midrule
+        TP1 & 4 & 4/5 -- \textbf{FAIL} & 0.784 & 0.079 \\
+        TP2 & 3 & 2/5 -- \textbf{FAIL} & 0.908 & 0.099 \\
+        \bottomrule
+      \end{tabularx}
+    \end{table}
+    \vspace{-0.2cm}
+    All 5 folds must pass for a window's structure to enter the
+    confirmatory family; scaled CFI/TLI fall well short of the
+    conventional $\geq$0.95 threshold at both windows, and RMSEA exceeds
+    the conventional $\leq$0.06 cutoff -- independent evidence, from a
+    completely different angle (holdout generalization vs. cross-fold
+    agreement), pointing the same direction.
+
+    \vspace{0.15cm}
+    \textbf{Promotive/adversity items: separate or bipolar?} Classifying
+    every promotive/adversity item pair by whichever pattern has posterior
+    probability $>$0.5:
+
+    \begin{table}[ht]
+      \centering
+      \fontsize{9}{11}\selectfont
+      \begin{tabularx}{\textwidth}{l c c c c}
+        \toprule
+        \textbf{Window} & \textbf{Pairs} & \textbf{Bipolar} & \textbf{Separate} & \textbf{Neither} \\
+        \midrule
+        TP1 & 72 & 13 & 42 & 17 \\
+        TP2 & 56 & 8 & 16 & 32 \\
+        \bottomrule
+      \end{tabularx}
+    \end{table}
+    \vspace{-0.2cm}
+    Separation is more common than bipolarity at both windows, but neither
+    pattern is close to universal -- most pairs don't cleanly fit either
+    story.
+  \end{block}
+\end{column}
+
+\separatorcolumn
+
+\begin{column}{\colwidth}
+  \begin{block}{H2 \& H3: Promotive Associations and Protective Moderation}
+    \vspace{-0.2cm}
+    Because both windows failed H1's reproducibility gate, the
+    preregistered decision rule routes \emph{every} formed effect away
+    from the confirmatory family:
+
+    \begin{tcolorbox}[colback=cardinalred, colframe=cardinalred, width=\linewidth]
+      \color{white}
+      \centering
+      \textbf{\Large Confirmatory family this run: 0 of 18 effects}\\
+      \small (9 H2 main effects + 9 H3 interactions, RQ5--RQ22)
+    \end{tcolorbox}
+
+    \vspace{0.15cm}
+    All 18 formed effects were still fit and reported descriptively
+    (gated-exploratory set) -- every 95\% credible interval crosses zero,
+    and every exploratory q-value is well above 0.05 (best case: TP1
+    MAP-DB Temper Loss interaction, $q=0.222$). No pattern here licenses
+    any confirmatory claim.
+
+    \vspace{0.15cm}
+    \textbf{Why the intervals are so wide.} TP1's four recovered dimensions
+    are highly collinear (up to $r=0.955$ between two adversity-dominant
+    factors); every adversity-dominant dimension enters the model
+    simultaneously as a covariate, leaving little independent variation to
+    attribute a unique main-effect slope to any one dimension. This is a
+    property of genuinely correlated household-adversity domains, not an
+    artifact of the estimation.
+
+    \begin{table}[ht]
+      \centering
+      \fontsize{8}{10}\selectfont
+      \begin{tabularx}{\textwidth}{l l c c}
+        \toprule
+        \textbf{Outcome (window)} & \textbf{Hyp.} & \textbf{Post.\ mean [95\% CI]} & \textbf{Excl.\ q} \\
+        \midrule
+        SPM-2 (TP1) & H3 & 0.031 [-0.068, 0.129] & 0.241 \\
+        MAP-DB Temper Loss (TP1) & H3 & 0.035 [-0.058, 0.128] & 0.222 \\
+        \bottomrule
+      \end{tabularx}
+    \end{table}
+    \vspace{-0.15cm}
+    \tiny (Two of the 18 gated-exploratory effects, shown for illustration
+    only -- full table in the reproducibility guide.)
+  \end{block}
+\end{column}
+
+\separatorcolumn
+
+\begin{column}{\colwidth}
+  \begin{block}{Supplementary Analyses (Not Preregistered)}
+    \vspace{-0.2cm}
+    \textbf{Marginal (one-factor-at-a-time) models.} Dropping the
+    collinear adversity covariates, two TP1 promotive main effects have
+    credible intervals excluding zero:
+
+    \begin{table}[ht]
+      \centering
+      \fontsize{8}{10}\selectfont
+      \begin{tabularx}{\textwidth}{l c c}
+        \toprule
+        \textbf{Outcome (TP1)} & \textbf{Post.\ mean [95\% CI]} & \textbf{q} \\
+        \midrule
+        SPM-2 & -0.150 [-0.241, -0.053] & 0.001 \\
+        MAP-DB Temper Loss & -0.141 [-0.223, -0.054] & 0.001 \\
+        \bottomrule
+      \end{tabularx}
+    \end{table}
+    \vspace{-0.2cm}
+    Hypothesis-generating only, not confirmatory -- a different
+    model/estimand than H2, fit on a structure that already failed the
+    whole-wave gate, and the two outcomes are not independent evidence
+    ($r=0.437$, same-window caregiver report).
+
+    \vspace{0.15cm}
+    \textbf{7-item cross-timepoint check.} Restricting to the 7 items
+    administered at both windows collapsed to a single active factor at
+    each wave and made reproducibility \emph{worse}, not better (TP1 gate:
+    1/5 vs. the full battery's 4/5; TP1 holdout CFI 0.266 vs. 0.784).
   \end{block}
 
-  \vspace{-0.5cm}
+  \vspace{-0.3cm}
+
+  \begin{block}{Conclusions \& Future Directions}
+    \vspace{-0.2cm}
+    \begin{itemize}
+      \setlength\itemsep{0.15em}
+      \item Neither developmental window's factor structure reproduced
+        across folds or generalized cleanly to held-out participants this
+        run.
+      \item The confirmatory family was empty by design -- no promotive
+        (H2) or protective (H3) association could be confirmed or
+        disconfirmed, not evidence that such effects are absent.
+      \item High inter-factor collinearity (TP1) limits how much
+        independent signal any one recovered dimension can carry.
+      \item \textbf{Next}: rerun without reverse-scoring any item (e.g.\
+        CHAOS), since folding a reverse-scored adversity item into a
+        ``promotive'' factor risks conflating absence-of-adversity with
+        genuine promotive content; revisit as TP2's rolling-enrollment N
+        grows.
+    \end{itemize}
+  \end{block}
+
+  \vspace{-0.3cm}
 
   \begin{block}{References}
-    \nocite{*}
-    \renewcommand{\bibfont}{\fontsize{8}{10}\selectfont}
+    \renewcommand{\bibfont}{\fontsize{7}{9}\selectfont}
     \printbibliography[heading=none]
   \end{block}
 \end{column}
 
 \separatorcolumn
-
-\begin{column}{\colwidth}
-  
-  \begin{block}{FIND had non-significant effects on Parent Self-Evaluation Task (n = 12), behaviorally and in ACC activation.}
-    
-    \begin{figure}[ht]
-      \centering
-      \includegraphics[clip, width=\textwidth]{pset.png}
-      \label{fig:pset}
-    \end{figure}
-    \vspace{-1.0cm}
-    \begin{tcolorbox}[colback=paloaltogreen, colframe=paloaltogreen, width=\linewidth]
-     \color{white}
-     {\text{Endorsement}_{\text{wave2}} = \beta_0 + \beta_1 \text{Endorsement}_{\text{wave1}} + \beta_2 \text{DS} + \beta_3 \text{Self} + \beta_4 \text{FIND} + \epsilon}
-    \end{tcolorbox}
-    \vspace{-0.2cm}
-    \begin{table}[ht]
-        \centering
-        \fontsize{9}{11}\selectfont
-          \begin{tabularx}{\textwidth}{l c c c c}
-            \toprule
-            \textbf{Parameter} & \textbf{Mean} & \textbf{SD} & \textbf{HDI 3\%} & \textbf{HDI 97\%} \\
-            \midrule
-            \rowcolor{yellow!50} Endorsement at time 1 & 0.971 & 0.117 & 0.762 & 1.195 \\
-            Developmentally Supportive & -0.119 & 5.598 & -10.848 & 10.277 \\
-            Statement about Self & 1.965 & 5.387 & -7.721 & 12.446 \\
-            FIND condition & -8.024 & 4.305 & -16.355 & -0.265 \\
-            \bottomrule
-          \end{tabularx}
-    \end{table}
-
-    Only proportion of statements endorsed at time 1 significantly predicted proportion of statements endorsed at time 2. Adding two and three-way interactions did not improve model fit. No significant differences were observed in activation of the anterior cingulate cortex (ACC) in all analyses.
-
-    \vspace{-0.35cm}
-    \begin{figure}[ht]
-      \centering
-      \includegraphics[clip, width=0.8\textwidth]{acc_selfchange.png}
-      \label{fig:pset_selfchange}
-    \end{figure}
-    \vspace{-0.65cm}
-    \begin{figure}[ht]
-      \centering
-      \includegraphics[clip, width=0.8\textwidth]{acc_dsdu.png}
-      \label{fig:acc_dsdu}
-    \end{figure}
-  \end{block}
-
-\end{column}
-
-\separatorcolumn
-
-\begin{column}{\colwidth}
-    
-      \begin{block}{FIND participants had marginally improved inhibitory control as measured on the Stop Signal Task (n = 17).}
-
-    \begin{figure}[ht]
-      \centering
-      \includegraphics[clip, width=0.6\textwidth]{stopsignal.png}
-        \\[0.5em]
-        {\tiny Source: Gaillard et al. (2020)}
-      \label{fig:stopsignal}
-    \end{figure}
-
-    \begin{tcolorbox}[colback=paloaltogreen, colframe=paloaltogreen, width=\linewidth]
-     \color{white}
-     $\text{SSRT}_{\text{wave2}} = \beta_0 + \beta_1 \text{SSRT}_{\text{wave1}} + \beta_2 \text{FIND} + \epsilon$
-    \end{tcolorbox}
-    
-    \begin{table}[ht]
-        \centering
-        \fontsize{9}{11}\selectfont
-          \begin{tabularx}{\textwidth}{l c c c c}
-            \toprule
-            \textbf{Parameter} & \textbf{Mean} & \textbf{SD} & \textbf{HDI 3\%} & \textbf{HDI 97\%} \\
-            \midrule
-            \rowcolor{yellow!50} SSRT at time 1 & 0.720 & 0.254 & 0.242 & 1.190 \\
-            FIND condition & -0.050 & 0.026 & -0.097 & 0.001 \\
-            \bottomrule
-          \end{tabularx}
-    \end{table}
-
-    Stop signal response time (SSRT) at time 2 was mainly predicted by SSRT at time 1 rather than intervention condition. Adding a two-way interaction did not improve model fit. We will be analyzing the neuroimaging data soon.
-    
-  \end{block}
-    \vspace{-0.25cm}
-
-    \begin{figure}[ht]
-        \centering
-          \includegraphics[clip, width=\textwidth]{ssrt.png}
-          \label{fig:ssrt}
-    \end{figure}
-
-\end{column}
-
-\separatorcolumn
 \end{columns}
 \end{frame}
-
 \end{document}
