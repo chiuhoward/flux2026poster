@@ -8,13 +8,13 @@
 % Packages
 % ====================
 
-\usepackage[size=custom,width=46,height=36,scale=0.5]{beamerposter}
+\usepackage[size=custom,width=45,height=36,scale=0.5]{beamerposter}
 \usetheme{gemini}
 \usecolortheme{stanford}
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{tikz}
-\usetikzlibrary{shapes, arrows, positioning}
+\usetikzlibrary{shapes, arrows, positioning, decorations.pathreplacing}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.17}
 \usepackage{fontspec}
@@ -26,6 +26,26 @@
 \usepackage[backend=biber, style=numeric-comp, maxnames=3, minnames=1, giveninits=true, uniquename=init]{biblatex}
 \addbibresource{poster.bib} % Adjust the filename as needed
 \usepackage{amssymb}
+
+% Factor colors -- same hex values (and same 35%-tint-over-white rule, via
+% xcolor's !35!white mixing) as diag_h2h3_forest.R's FACTOR_COLORS, so a
+% factor reads as the same color here as in the H2/H3 forest plot.
+\definecolor{factorCaregiverStress}{HTML}{7570B3}
+\definecolor{factorEarlyResources}{HTML}{E6AB02}
+\definecolor{factorNbhdSafety}{HTML}{D95F02}
+\definecolor{factorEconHardship}{HTML}{E7298A}
+\definecolor{factorHomeEnv}{HTML}{66A61E}
+\definecolor{factorTrauma}{HTML}{A6761D}
+
+% One factor's colored box: name in a fixed-width left column, its item
+% list in the remaining width, both left-aligned -- an "invisible seam"
+% since both columns share the box's own colback, no rule between them.
+\newcommand{\factorbox}[3]{%
+  \begin{tcolorbox}[colback=#1!35!white, colframe=#1!35!white,
+    boxsep=1pt, top=2pt, bottom=2pt, left=4pt, right=4pt]
+    \begin{minipage}[t]{0.32\linewidth}\textit{#2}\end{minipage}%
+    \begin{minipage}[t]{0.66\linewidth}#3\end{minipage}
+  \end{tcolorbox}}
 
 % Banner colour options (from the upstream template README):
 %   \setbeamercolor{headline}{bg=paloaltogreen,fg=white}  % white text, Palo Alto green banner
@@ -97,12 +117,12 @@
 \newlength{\sepwidth}
 \newlength{\colwidth}
 \setlength{\sepwidth}{0.025\paperwidth}
-\setlength{\colwidth}{0.3\paperwidth}
+\setlength{\colwidth}{0.3\paperwidth} % single continuous 3-column body, no row break
 
 \newcommand{\separatorcolumn}{\begin{column}{\sepwidth}\end{column}}
 
 
-\title{Dimensions of Early Enrichment (DEE): Bayesian Exploratory Factor Structure of Caregiving and Environmental Indicators and Associations With Early Development in the HBCD Study}
+\title{Does a Reproducible Promotive/Adversity Structure Exist in HBCD Infancy Data?}
 
 
 \author{\fontsize{16}{18}\selectfont Howard Chiu \inst{1} \and Monica Ellwood-Lowe \inst{1} \and Philip Fisher \inst{1,2}}
@@ -132,12 +152,12 @@
 \addtobeamertemplate{headline}{}
 {
   \begin{tikzpicture}[remember picture,overlay]
-    \node [anchor=north east, inner sep=3cm] at ([xshift=2.25cm,yshift=-2.2cm]current page.north east)
+    \node [anchor=north east, inner sep=3cm] at ([xshift=2.25cm,yshift=0.4cm]current page.north east)
     {\includegraphics[width=6.25cm]{stanford_logos/GSE-hor-logo-white.png}};
   \end{tikzpicture}
 
   \begin{tikzpicture}[remember picture,overlay]
-    \node [anchor=north east, inner sep=3cm] at ([xshift=18.70cm,yshift=-1.35cm]current page.north east)
+    \node [anchor=north east, inner sep=3cm] at ([xshift=18.70cm,yshift=1.35cm]current page.north east)
     {\includegraphics[width=36.9cm]{stanford_logos/stanford-line2-10-white.png}};
   \end{tikzpicture}
 
@@ -145,235 +165,276 @@
 }
 
 \begin{frame}[t]
-% Top half - two columns
-\begin{columns}[t]
-\begin{column}{\textwidth}
-  \vspace{-0.5cm}
-  \begin{block}{What is DEE, and what does it ask?}
-    \begin{columns}[t]
-      \begin{column}{0.48\textwidth}
-        \vspace{-0.4cm}
-        \begin{block}{Why study this?}
-          \vspace{-0.1cm}
-          The HEALthy Brain and Child Development (HBCD) Study is a multisite,
-          prospective longitudinal cohort recruited across 27 U.S. sites,
-          designed to characterize brain, cognitive, and behavioral
-          development from the prenatal period through early childhood
-          \supercite{nelson2024hbcd}. We use HBCD Data Release 2.0 phenotype
-          data to ask how caregiving and environmental context relate to
-          early child development.
-
-          \vspace{0.2cm}
-          Brieant et al. \supercite{brieant2023characterizing} extracted ten
-          adversity dimensions from a risk-only item battery in ABCD, later
-          used by Beck et al. \supercite{beck2024dimensions} to predict
-          brain-age gap. Neither study included any promotive or protective
-          measure (caregiver warmth, cognitive stimulation, breastfeeding),
-          so neither could test whether promotive and adversity content
-          separate into distinct dimensions or collapse into a single
-          bipolar continuum. \textbf{DEE puts both kinds of indicators in
-          the same factor-analytic input matrix} and lets a genuinely
-          Bayesian exploratory method \supercite{conti2014bayesian} decide
-          -- the number of active factors and the item-to-factor allocation
-          are inferred from the model's own posterior, never fixed by the
-          analyst.
-        \end{block}
-      \end{column}
-
-      \begin{column}{0.48\textwidth}
-        \vspace{-0.4cm}
-        \begin{block}{Two-stage design: discover, then confirm}
-          \vspace{-0.1cm}
-          Each developmental window (TP1: prenatal-9mo; TP2: 9-17mo) is
-          modeled independently. Within each window, subjects are split
-          once into an 80\% discovery sample (further divided into 5
-          cross-validation folds, 4 MCMC chains per fold) and a permanent
-          20\% confirmation holdout never touched during discovery
-          \supercite{cudeckbrowne1983crossvalidation}. Rolling HBCD
-          enrollment means TP2's usable N is far smaller than TP1's:
-
-          \begin{center}
-          \begin{tikzpicture}[node distance=2cm, auto]
-            \tikzstyle{tp1block} = [rectangle, draw, fill=cardinalred,
-              text width=4.4em, text centered, rounded corners,
-              minimum height=3.4em, font=\small, text=white]
-            \tikzstyle{tp2block} = [rectangle, draw, fill=paloaltogreen,
-              text width=4.4em, text centered, rounded corners,
-              minimum height=3.4em, font=\small, text=white]
-            \tikzstyle{arrow} = [draw, thick, -latex']
-            \tikzstyle{lbl} = [font=\footnotesize, text centered]
-
-            \node [tp1block] (tp1_n) {\textbf{\normalsize N=4{,}117}};
-            \node [tp1block, right of=tp1_n, xshift=2.9cm] (tp1_disc) {\textbf{\normalsize Discovery\\ n=3{,}304}};
-            \node [tp1block, right of=tp1_disc, xshift=3.1cm] (tp1_hold) {\textbf{\normalsize Holdout\\ n=812}};
-
-            \node [tp2block, below of=tp1_n, yshift=0.4cm] (tp2_n) {\textbf{\normalsize N=681}};
-            \node [tp2block, right of=tp2_n, xshift=2.9cm] (tp2_disc) {\textbf{\normalsize Discovery\\ n=557}};
-            \node [tp2block, right of=tp2_disc, xshift=3.1cm] (tp2_hold) {\textbf{\normalsize Holdout\\ n=123}};
-
-            \draw [arrow] (tp1_n) -- (tp1_disc) node [midway, above, lbl] {80\%};
-            \draw [arrow] (tp1_disc) -- (tp1_hold) node [midway, above, lbl] {5-fold $\times$ 4-chain BEFA};
-            \draw [arrow] (tp2_n) -- (tp2_disc) node [midway, above, lbl] {80\%};
-            \draw [arrow] (tp2_disc) -- (tp2_hold) node [midway, above, lbl] {5-fold $\times$ 4-chain BEFA};
-
-            \node [font=\bfseries, left of=tp1_n, xshift=-1.4cm] {TP1};
-            \node [font=\bfseries, left of=tp2_n, xshift=-1.4cm] {TP2};
-          \end{tikzpicture}
-          \end{center}
-          \vspace{-0.1cm}
-          17 candidate items at TP1, 15 at TP2 (caregiver-child relationship,
-          breastfeeding, neighborhood/housing, discrimination, financial
-          hardship, and language/cognitive stimulation measures).
-          \textbf{H1} asks how many factors best describe this structure and
-          whether it reproduces across folds and generalizes to the holdout;
-          \textbf{H2}/\textbf{H3} ask whether promotive-dominant recovered
-          dimensions predict more favorable outcomes, and whether that
-          association is protectively moderated by adversity-dominant
-          dimensions.
-        \end{block}
-      \end{column}
-    \end{columns}
-  \end{block}
-\end{column}
-\end{columns}
-
-% Bottom half - three columns
 \vspace{-0.5cm}
 \begin{columns}[t]
 \separatorcolumn
 
 \begin{column}{\colwidth}
-  \begin{block}{H1: Structural Discovery}
+  \begin{block}{Why study this?}
+    \vspace{-0.1cm}
+    \begin{itemize}
+      \setlength\itemsep{0.15em}
+      \item HBCD: multisite, prospective, prenatal through early
+        childhood \supercite{nelsonIntroductionHEALthyBrain2024}.
+      \item \textbf{Preregistered battery returned mostly null
+        results.} Extended post-hoc with measures HBCD had actually
+        collected (IBQR, GLED at TP2, ES4A/PSS-4/NBHSAF at TP2) --
+        disclosed as a deviation.
+    \end{itemize}
+
     \vspace{-0.2cm}
-    Neither window's recovered structure met the preregistered qualitative
-    bar (broadly fold-stable, and fitting acceptably on the holdout):
-
-    \begin{table}[ht]
-      \centering
-      \fontsize{9}{11}\selectfont
-      \begin{tabularx}{\textwidth}{l c c c c}
-        \toprule
-        \textbf{Window} & \textbf{Factors (M)} & \textbf{Gate: folds pass} & \textbf{CFI (holdout)} & \textbf{RMSEA} \\
-        \midrule
-        TP1 & 4 & 4/5 -- \textbf{FAIL} & 0.784 & 0.079 \\
-        TP2 & 3 & 2/5 -- \textbf{FAIL} & 0.908 & 0.099 \\
-        \bottomrule
-      \end{tabularx}
-    \end{table}
-    \vspace{-0.2cm}
-    All 5 folds must pass for a window's structure to enter the
-    confirmatory family; scaled CFI/TLI fall well short of the
-    conventional $\geq$0.95 threshold at both windows, and RMSEA exceeds
-    the conventional $\leq$0.06 cutoff -- independent evidence, from a
-    completely different angle (holdout generalization vs. cross-fold
-    agreement), pointing the same direction.
-
-    \vspace{0.15cm}
-    \textbf{Promotive/adversity items: separate or bipolar?} Classifying
-    every promotive/adversity item pair by whichever pattern has posterior
-    probability $>$0.5:
-
-    \begin{table}[ht]
-      \centering
-      \fontsize{9}{11}\selectfont
-      \begin{tabularx}{\textwidth}{l c c c c}
-        \toprule
-        \textbf{Window} & \textbf{Pairs} & \textbf{Bipolar} & \textbf{Separate} & \textbf{Neither} \\
-        \midrule
-        TP1 & 72 & 13 & 42 & 17 \\
-        TP2 & 56 & 8 & 16 & 32 \\
-        \bottomrule
-      \end{tabularx}
-    \end{table}
-    \vspace{-0.2cm}
-    Separation is more common than bipolarity at both windows, but neither
-    pattern is close to universal -- most pairs don't cleanly fit either
-    story.
-  \end{block}
-\end{column}
-
-\separatorcolumn
-
-\begin{column}{\colwidth}
-  \begin{block}{H2 \& H3: Promotive Associations and Protective Moderation}
-    \vspace{-0.2cm}
-    Because both windows failed H1's reproducibility gate, the
-    preregistered decision rule routes \emph{every} formed effect away
-    from the confirmatory family:
-
-    \begin{tcolorbox}[colback=cardinalred, colframe=cardinalred, width=\linewidth]
+    \begin{tcolorbox}[colback=coolgray, colframe=coolgray, width=\linewidth]
       \color{white}
-      \centering
-      \textbf{\Large Confirmatory family this run: 0 of 18 effects}\\
-      \small (9 H2 main effects + 9 H3 interactions, RQ5--RQ22)
+      \textbf{Q1 (H1)}: does a low-dimensional promotive/adversity
+      structure exist in HBCD's item battery, and does it reproduce
+      across independent subsets of the same cohort?
+
+      \vspace{0.1cm}
+      \textbf{Q2 (H2/H3)}: if so, do promotive-dominant dimensions
+      predict more favorable outcomes, and do adversity-dominant
+      dimensions protectively moderate that association?
     \end{tcolorbox}
+  \end{block}
 
-    \vspace{0.15cm}
-    All 18 formed effects were still fit and reported descriptively
-    (gated-exploratory set) -- every 95\% credible interval crosses zero,
-    and every exploratory q-value is well above 0.05 (best case: TP1
-    MAP-DB Temper Loss interaction, $q=0.222$). No pattern here licenses
-    any confirmatory claim.
+  \vspace{-0.3cm}
+  \begin{block}{Two-stage design: discover, then confirm}
+    \vspace{-0.1cm}
+    \begin{itemize}
+      \setlength\itemsep{0.15em}
+      \item TP1 (prenatal-9mo) and TP2 (9-17mo) modeled independently
+        via Bayesian EFA (BEFA) \supercite{contiBayesianExploratoryFactor2014}
+        \supercite{cudeckCrossValidationCovarianceStructures1983}.
+        Rolling enrollment: TP2 N far smaller.
+    \end{itemize}
 
-    \vspace{0.15cm}
-    \textbf{Why the intervals are so wide.} TP1's four recovered dimensions
-    are highly collinear (up to $r=0.955$ between two adversity-dominant
-    factors); every adversity-dominant dimension enters the model
-    simultaneously as a covariate, leaving little independent variation to
-    attribute a unique main-effect slope to any one dimension. This is a
-    property of genuinely correlated household-adversity domains, not an
-    artifact of the estimation.
+    \vspace{-1.0cm}
+    \begin{center}
+    \resizebox{\linewidth}{!}{%
+    \begin{tikzpicture}[node distance=2cm, auto]
+      \tikzstyle{tp1block} = [rectangle, draw, fill=cardinalred,
+        text width=4.4em, text centered, rounded corners,
+        minimum height=3.4em, font=\small, text=white]
+      \tikzstyle{tp2block} = [rectangle, draw, fill=paloaltogreen,
+        text width=4.4em, text centered, rounded corners,
+        minimum height=3.4em, font=\small, text=white]
+      \tikzstyle{arrow} = [draw, thick, -latex']
+      \tikzstyle{lbl} = [font=\normalsize, text centered]
+
+      \node [tp1block] (tp1_n) {\textbf{\normalsize N=3{,}599}};
+      \node [tp1block, right of=tp1_n, xshift=2.9cm] (tp1_disc) {\textbf{\normalsize Discovery\\ n=2{,}884}};
+      \node [tp1block, right of=tp1_disc, xshift=3.1cm] (tp1_hold) {\textbf{\normalsize Holdout\\ n=715}};
+
+      \node [tp2block, below of=tp1_n, yshift=0.4cm] (tp2_n) {\textbf{\normalsize N=682}};
+      \node [tp2block, right of=tp2_n, xshift=2.9cm] (tp2_disc) {\textbf{\normalsize Discovery\\ n=558}};
+      \node [tp2block, right of=tp2_disc, xshift=3.1cm] (tp2_hold) {\textbf{\normalsize Holdout\\ n=124}};
+
+      \draw [arrow] (tp1_n) -- (tp1_disc) node [midway, above, lbl] {80\%};
+      \draw [arrow] (tp1_disc) -- (tp1_hold) node [midway, above, lbl] {\shortstack{5-fold $\times$\\4-chain BEFA}};
+      \draw [arrow] (tp2_n) -- (tp2_disc) node [midway, above, lbl] {80\%};
+      \draw [arrow] (tp2_disc) -- (tp2_hold) node [midway, above, lbl] {\shortstack{5-fold $\times$\\4-chain BEFA}};
+
+      \node [font=\bfseries, left of=tp1_n, xshift=-1.4cm] {TP1};
+      \node [font=\bfseries, left of=tp2_n, xshift=-1.4cm] {TP2};
+    \end{tikzpicture}%
+    }
+    \end{center}
+    \vspace{-0.3cm}
+    \begin{itemize}
+      \setlength\itemsep{0.15em}
+      \item 18 candidate items at TP1, 24 at TP2 (23 active --
+        full list below).
+    \end{itemize}
+  \end{block}
+
+  \vspace{-0.5cm}
+  \begin{block}{Measures, Visits, and Timepoint Assembly}
+    \vspace{-0.1cm}
+    \fontsize{10.5}{11}\selectfont
+    \begin{tabularx}{\linewidth}{X r r r r r}
+            \toprule
+            & \multicolumn{3}{c}{TP1} & \multicolumn{2}{c}{TP2} \\
+            \cmidrule(lr){2-4}\cmidrule(lr){5-6}
+            \textbf{Measure} & \textbf{V01} & \textbf{V02} & \textbf{V03} & \textbf{V04} & \textbf{V05} \\
+            \midrule
+            Breastfeeding Hist.$^{\dagger *}$ & -- & 2255 & 64 & 9 & -- \\
+            Area Depriv.\ Index$^\dagger$ & 2649 & -- & -- & -- & 577 \\
+            Child Opp.\ Index 2.0$^\dagger$ & 2665 & -- & -- & -- & 580 \\
+            MLDS (lang.\ exposure)$^\dagger$ & -- & -- & 1284 & 636 & -- \\
+            Walkability Index$^\dagger$ & 2193 & -- & -- & -- & 467 \\
+            Tree canopy cover$^\dagger$ & 2665 & -- & -- & -- & 580 \\
+            Neighborhood safety$^\dagger$ & 3500 & 12 & -- & -- & 378 \\
+            Econ.\ hardship: eviction$^\dagger$ & 3502 & 14 & -- & -- & 382 \\
+            Econ.\ hardship: general$^\dagger$ & 3051 & 12 & -- & -- & 343 \\
+            Food insecurity$^\dagger$ & -- & 2219 & 1312 & 627 & -- \\
+            Transitions-in-Care$^\dagger$ & -- & 1057 & 743 & 521 & 52 \\
+            E-HITS & 3395 & 12 & -- & -- & -- \\
+            PhenX Discrim.$^\dagger$ & 3378 & 11 & -- & -- & 371 \\
+            ecPROMIS CG-Child Rel.$^\dagger$ & -- & -- & 1323 & -- & 28 \\
+            PACEs (current) & 3473 & 10 & -- & -- & -- \\
+            PROMIS ES4a$^\dagger$ & 3507 & 2202 & 1302 & 629 & -- \\
+            PSS-4$^\dagger$ & 3499 & 2203 & 1303 & 630 & -- \\
+            IBQ-R (child temperament)$^\dagger$ & -- & -- & 1308 & -- & 352 \\
+            ScreenQ (screen time) & -- & -- & -- & 641 & -- \\
+            HOME Inv.: Cog.\ Stimulation & -- & -- & -- & 615 & -- \\
+            PACEs (retrospective) & -- & -- & -- & -- & 382 \\
+            HOME Inv.: Emotional Support & -- & -- & -- & 615 & -- \\
+            CASR-SF (partner abuse) & -- & -- & -- & 530 & -- \\
+            PEARLS (pediatric ACEs) & -- & -- & -- & 601 & -- \\
+            ACEs (adult) & -- & -- & -- & 588 & -- \\
+            ecPROMIS CG-Child Rel.$^\dagger$ & -- & -- & -- & -- & 392 \\
+            CHAOS (unreflected) & -- & -- & -- & 634 & -- \\
+            ECBQ (child temperament) & -- & -- & -- & -- & 74 \\
+            \bottomrule
+          \end{tabularx}
+
+          \vspace{0.05cm}
+          {\fontsize{9}{9.5}\selectfont\setlength{\parskip}{0pt}
+          $^\dagger$ shared across waves (same instrument or
+          GLED/PROMIS parallel form). $^*$ excluded at TP2, too sparse
+          ($<$10\% coverage). Outcomes: 3 Bayley subscales, CDI-WG,
+          Vineland-ABC, PROMIS-Peer, SPM-2, MAP-DB. Covariates: site,
+          maternal education/income, age.\par}
+        \end{block}
+      \end{column}
+
+\separatorcolumn
+
+\begin{column}{\colwidth}
+  \begin{block}{H1: Structure Failed to Reproduce}
 
     \begin{table}[ht]
       \centering
-      \fontsize{8}{10}\selectfont
-      \begin{tabularx}{\textwidth}{l l c c}
+      \fontsize{12}{13.2}\selectfont
+      \begin{tabularx}{\textwidth}{l c c c c}
         \toprule
-        \textbf{Outcome (window)} & \textbf{Hyp.} & \textbf{Post.\ mean [95\% CI]} & \textbf{Excl.\ q} \\
+        \textbf{Window} & \textbf{Factors (M)} & \textbf{Folds agreeing} & \textbf{CFI (holdout)} & \textbf{RMSEA} \\
         \midrule
-        SPM-2 (TP1) & H3 & 0.031 [-0.068, 0.129] & 0.241 \\
-        MAP-DB Temper Loss (TP1) & H3 & 0.035 [-0.058, 0.128] & 0.222 \\
+        TP1 & 4 & 3/5 -- \textbf{FAIL} & 0.903 (scaled) & 0.048 \\
+        TP2 & 4 & 1/5 -- \textbf{FAIL} & 0.798 & 0.107 \\
         \bottomrule
       \end{tabularx}
     \end{table}
-    \vspace{-0.15cm}
-    \tiny (Two of the 18 gated-exploratory effects, shown for illustration
-    only -- full table in the reproducibility guide.)
+    \vspace{-0.25cm}
+    \begin{itemize}
+      \setlength\itemsep{0.1em}
+      \item We fit each window on 5 independently-resampled folds: TP1 agreed on only 3, TP2 on just 1.
+      \item Held-out sample poorly fit at both timepoints (CFI $\geq$0.95, RMSEA $\leq$0.06 are the usual thresholds).
+      \item Adding IBQR, GLED-TP2, and CHAOS post-preregistration changes item grouping but not instability.
+    \end{itemize}
+
+    \vspace{-0.7cm}
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[width=\textwidth]{figures/fold_loading_stability_adicoi_combined.png}
+    \end{figure}
+  \end{block}
+
+  \vspace{-0.6cm}
+  \begin{block}{H2 \& H3: 0 of 27 Effects Confirmatory}
+    \vspace{-0.2cm}
+    \textbf{H2}: outcome $\sim$ 4 factors + age + site, simultaneous.
+    \\
+    \textbf{H3}: H2 + each wave's clearest promotive $\times$ adversity
+    interaction.
+
+    \vspace{-0.35cm}
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[width=\textwidth]{figures/h2h3_forest_plot.png}
+    \end{figure}
+
+    \vspace{-0.2cm}
+    \begin{itemize}
+      \setlength\itemsep{0.1em}
+      \item TP1's intervals are wide -- factors highly collinear
+        (pairwise $|r|$ up to 0.96), entered simultaneously.
+      \item Left-strip color = factor (H2) or interaction's promotive
+        factor (H3); same color = same factor in both panels (e.g.
+        Early-resources is gold in both waves).
+    \end{itemize}
+
+    \begin{columns}[t]
+      \begin{column}{0.5\textwidth}
+        \begin{figure}[ht]
+          \centering
+          \includegraphics[width=0.92\textwidth]{figures/factor_correlation_heatmap.png}
+        \end{figure}
+      \end{column}
+      \begin{column}{0.5\textwidth}
+        \begin{figure}[ht]
+          \centering
+          \includegraphics[width=0.92\textwidth]{figures/bronfenbrenner_tp1.png}
+        \end{figure}
+      \end{column}
+    \end{columns}
   \end{block}
 \end{column}
 
 \separatorcolumn
 
 \begin{column}{\colwidth}
-  \begin{block}{Supplementary Analyses (Not Preregistered)}
+  \begin{block}{Supplementary (Not Preregistered): Confounds Explain Only Part of the Pattern}
     \vspace{-0.2cm}
-    \textbf{Marginal (one-factor-at-a-time) models.} Dropping the
-    collinear adversity covariates, two TP1 promotive main effects have
-    credible intervals excluding zero:
+    \textbf{Marginal (one-factor-at-a-time) models} -- drop every
+    other factor covariate, keep age/site only:
 
-    \begin{table}[ht]
+    \vspace{-0.5cm}
+    \begin{figure}[ht]
       \centering
-      \fontsize{8}{10}\selectfont
-      \begin{tabularx}{\textwidth}{l c c}
-        \toprule
-        \textbf{Outcome (TP1)} & \textbf{Post.\ mean [95\% CI]} & \textbf{q} \\
-        \midrule
-        SPM-2 & -0.150 [-0.241, -0.053] & 0.001 \\
-        MAP-DB Temper Loss & -0.141 [-0.223, -0.054] & 0.001 \\
-        \bottomrule
-      \end{tabularx}
-    \end{table}
+      \includegraphics[width=\textwidth]{figures/marginal_effect_scatter_tp1.png}
+    \end{figure}
     \vspace{-0.2cm}
-    Hypothesis-generating only, not confirmatory -- a different
-    model/estimand than H2, fit on a structure that already failed the
-    whole-wave gate, and the two outcomes are not independent evidence
-    ($r=0.437$, same-window caregiver report).
+    \begin{itemize}
+      \setlength\itemsep{0.1em}
+      \item TP1's only 2 outcomes tested (SPM-2, MAP-DB) are both
+        caregiver-reported on nearly the same sample ($r=0.437$).
+      \item \textbf{Cross-timepoint check}: shared items are
+        adversity-heavy, fit actually worse across chains and folds.
+      \item \textbf{SES check}: maternal ed./income shrink but don't
+        eliminate associations -- partial confounding; doesn't explain
+        ADI/COI pairing.
+    \end{itemize}
+  \end{block}
 
-    \vspace{0.15cm}
-    \textbf{7-item cross-timepoint check.} Restricting to the 7 items
-    administered at both windows collapsed to a single active factor at
-    each wave and made reproducibility \emph{worse}, not better (TP1 gate:
-    1/5 vs. the full battery's 4/5; TP1 holdout CFI 0.266 vs. 0.784).
+  \vspace{-0.5cm}
+
+  \begin{block}{Factor Membership Diverges Between Waves}
+    \fontsize{12}{13.2}\selectfont
+    % Each factor gets the same colored box (same hex, same 35% tint) as
+    % its strip in the H2/H3 forest plot -- TP1 and TP2 are independent
+    % stacks now (not a joined X X table row-for-row) since most factors
+    % don't have a same-row counterpart in the other wave anyway.
+    \begin{columns}[t]
+      \begin{column}{0.49\linewidth}
+        \centering\textbf{TP1}\\[3pt]
+        \vspace{-0.3cm}
+        \factorbox{factorCaregiverStress}{Caregiver-stress}{PACEs+, ES4A+, PSS-4$-$, Discrim.$-$, E-HITS$-$, CCR-Inf+, IBQ-R$-$}
+        \vspace{-0.5cm}
+        \factorbox{factorEarlyResources}{Early-resources}{COI+, ADI$-$, Breastfeeding+, MLDS$-$ (n.s.)}
+        \vspace{-0.5cm}
+        \factorbox{factorNbhdSafety}{Nbhd.-safety}{Safety+, Eviction$-$, Tree canopy+}
+        \vspace{-0.5cm}
+        \factorbox{factorEconHardship}{Econ.-hardship}{Hardship+, Food insecurity+}
+      \end{column}
+      \begin{column}{0.49\linewidth}
+        \centering\textbf{TP2}\\[3pt]
+        \vspace{-0.3cm}
+        \factorbox{factorCaregiverStress}{Caregiver-stress}{PSS-4+, Discrim.+, CHAOS+, ES4A$-$}
+        \vspace{-0.5cm}
+        \factorbox{factorEarlyResources}{Early-resources}{ADI+, COI$-$}
+        \vspace{-0.5cm}
+        \factorbox{factorHomeEnv}{Home-env./stimulation}{HOME-ES+, HOME-CS+, PACEs(retro)+, Hardship$-$, ScreenQ$-$, Safety (n.s.)}
+        \vspace{-0.5cm}
+        \factorbox{factorTrauma}{Trauma/ abuse-history}{PEARLS+, CASR-SF+, ACEs(adult)+}
+      \end{column}
+    \end{columns}
+
+    \vspace{0.05cm}
+    {\fontsize{9}{9.5}\selectfont\setlength{\parskip}{0pt}
+    Signs = holdout loading direction (not magnitude); TP2 realigned to
+    TP1's orientation where factors recur (ADI/COI,
+    PSS-4/ES4A/Discrimination), since BEFA's sign is arbitrary per wave.
+    n.s. = not significant.\par}
   \end{block}
 
   \vspace{-0.3cm}
@@ -382,28 +443,31 @@
     \vspace{-0.2cm}
     \begin{itemize}
       \setlength\itemsep{0.15em}
-      \item Neither developmental window's factor structure reproduced
-        across folds or generalized cleanly to held-out participants this
-        run.
-      \item The confirmatory family was empty by design -- no promotive
-        (H2) or protective (H3) association could be confirmed or
-        disconfirmed, not evidence that such effects are absent.
-      \item High inter-factor collinearity (TP1) limits how much
-        independent signal any one recovered dimension can carry.
-      \item \textbf{Next}: rerun without reverse-scoring any item (e.g.\
-        CHAOS), since folding a reverse-scored adversity item into a
-        ``promotive'' factor risks conflating absence-of-adversity with
-        genuine promotive content; revisit as TP2's rolling-enrollment N
-        grows.
+      \item Neither window's structure reproduced across folds or
+        holdout.
+      \item Absence of evidence for H2/H3 association.
+      \item TP1's factor collinearity limits  independent signal from any one factor.
+      \item ADI/COI (neighborhood-level) correlate only $-0.24$ to
+        $-0.35$ with the household-level items (breastfeeding,
+        language exposure) they'd been bundled with -- distinguishable,
+        not redundant.
+      \item \textbf{Food for thought}: TP1's Early-resources,
+        Nbhd.-safety, and Econ.-hardship factors intercorrelate up to
+        0.96, yet ADI/COI stay distinguishable from household items --
+        mixed evidence for Bronfenbrenner-style nested levels, worth
+        designing a direct test for.
+      \item \textbf{Next step}: cross-wave measurement-invariance test
+        on shared items -- developmental change vs. instrument-switching.
+      \item Revisit as TP2's rolling-enrollment N grows.
     \end{itemize}
   \end{block}
 
   \vspace{-0.3cm}
 
-  \begin{block}{References}
-    \renewcommand{\bibfont}{\fontsize{7}{9}\selectfont}
-    \printbibliography[heading=none]
-  \end{block}
+%  \begin{block}{References}
+%    \renewcommand{\bibfont}{\fontsize{7}{9}\selectfont}
+%    \printbibliography[heading=none]
+%  \end{block}
 \end{column}
 
 \separatorcolumn
