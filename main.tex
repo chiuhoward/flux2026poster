@@ -317,83 +317,16 @@
     \vspace{-0.25cm}
     \begin{itemize}
       \setlength\itemsep{0.1em}
-      \item We fit each window on 5 independently-resampled folds: TP1 agreed on only 3, TP2 on just 1.
-      \item Held-out sample poorly fit at both timepoints (CFI $\geq$0.95, RMSEA $\leq$0.06 are the usual thresholds).
+      \item Held-out fit: TP1 fails CFI (0.903 vs.\ conventional threshold of 0.95) but clears
+        RMSEA (0.048 vs.\ conventional threshold of 0.06); TP2 fails both (0.798, 0.107).
       \item Adding IBQR, GLED-TP2, and CHAOS post-preregistration changes item grouping but not instability.
     \end{itemize}
 
     \vspace{-0.7cm}
     \begin{figure}[ht]
       \centering
-      \includegraphics[width=\textwidth]{figures/fold_loading_stability_adicoi_combined.png}
+      \includegraphics[width=0.95\textwidth]{figures/fold_loading_stability_adicoi_combined.png}
     \end{figure}
-  \end{block}
-
-  \vspace{-0.6cm}
-  \begin{block}{H2 \& H3: 0 of 27 Effects Confirmatory}
-    \vspace{-0.2cm}
-    \textbf{H2}: outcome $\sim$ 4 factors + age + site, simultaneous.
-    \\
-    \textbf{H3}: H2 + each wave's clearest promotive $\times$ adversity
-    interaction.
-
-    \vspace{-0.35cm}
-    \begin{figure}[ht]
-      \centering
-      \includegraphics[width=\textwidth]{figures/h2h3_forest_plot.png}
-    \end{figure}
-
-    \vspace{-0.2cm}
-    \begin{itemize}
-      \setlength\itemsep{0.1em}
-      \item TP1's intervals are wide -- factors highly collinear
-        (pairwise $|r|$ up to 0.96), entered simultaneously.
-      \item Left-strip color = factor (H2) or interaction's promotive
-        factor (H3); same color = same factor in both panels (e.g.
-        Early-resources is gold in both waves).
-    \end{itemize}
-
-    \begin{columns}[t]
-      \begin{column}{0.5\textwidth}
-        \begin{figure}[ht]
-          \centering
-          \includegraphics[width=0.92\textwidth]{figures/factor_correlation_heatmap.png}
-        \end{figure}
-      \end{column}
-      \begin{column}{0.5\textwidth}
-        \begin{figure}[ht]
-          \centering
-          \includegraphics[width=0.92\textwidth]{figures/bronfenbrenner_tp1.png}
-        \end{figure}
-      \end{column}
-    \end{columns}
-  \end{block}
-\end{column}
-
-\separatorcolumn
-
-\begin{column}{\colwidth}
-  \begin{block}{Supplementary (Not Preregistered): Confounds Explain Only Part of the Pattern}
-    \vspace{-0.2cm}
-    \textbf{Marginal (one-factor-at-a-time) models} -- drop every
-    other factor covariate, keep age/site only:
-
-    \vspace{-0.5cm}
-    \begin{figure}[ht]
-      \centering
-      \includegraphics[width=\textwidth]{figures/marginal_effect_scatter_tp1.png}
-    \end{figure}
-    \vspace{-0.2cm}
-    \begin{itemize}
-      \setlength\itemsep{0.1em}
-      \item TP1's only 2 outcomes tested (SPM-2, MAP-DB) are both
-        caregiver-reported on nearly the same sample ($r=0.437$).
-      \item \textbf{Cross-timepoint check}: shared items are
-        adversity-heavy, fit actually worse across chains and folds.
-      \item \textbf{SES check}: maternal ed./income shrink but don't
-        eliminate associations -- partial confounding; doesn't explain
-        ADI/COI pairing.
-    \end{itemize}
   \end{block}
 
   \vspace{-0.5cm}
@@ -408,9 +341,9 @@
       \begin{column}{0.49\linewidth}
         \centering\textbf{TP1}\\[3pt]
         \vspace{-0.3cm}
-        \factorbox{factorCaregiverStress}{Caregiver-stress}{PACEs+, ES4A+, PSS-4$-$, Discrim.$-$, E-HITS$-$, CCR-Inf+, IBQ-R$-$}
-        \vspace{-0.5cm}
         \factorbox{factorEarlyResources}{Early-resources}{COI+, ADI$-$, Breastfeeding+, MLDS$-$ (n.s.)}
+        \vspace{-0.5cm}
+        \factorbox{factorCaregiverStress}{Caregiver-stress}{PACEs+, ES4A+, PSS-4$-$, Discrim.$-$, E-HITS$-$, CCR-Inf+, IBQ-R$-$}
         \vspace{-0.5cm}
         \factorbox{factorNbhdSafety}{Nbhd.-safety}{Safety+, Eviction$-$, Tree canopy+}
         \vspace{-0.5cm}
@@ -419,9 +352,9 @@
       \begin{column}{0.49\linewidth}
         \centering\textbf{TP2}\\[3pt]
         \vspace{-0.3cm}
-        \factorbox{factorCaregiverStress}{Caregiver-stress}{PSS-4+, Discrim.+, CHAOS+, ES4A$-$}
+        \factorbox{factorEarlyResources}{Early-resources}{COI+, ADI$-$}
         \vspace{-0.5cm}
-        \factorbox{factorEarlyResources}{Early-resources}{ADI+, COI$-$}
+        \factorbox{factorCaregiverStress}{Caregiver-stress}{PSS-4$-$, Discrim.$-$, CHAOS$-$, ES4A+}
         \vspace{-0.5cm}
         \factorbox{factorHomeEnv}{Home-env./stimulation}{HOME-ES+, HOME-CS+, PACEs(retro)+, Hardship$-$, ScreenQ$-$, Safety (n.s.)}
         \vspace{-0.5cm}
@@ -430,36 +363,82 @@
     \end{columns}
 
     \vspace{0.05cm}
-    {\fontsize{9}{9.5}\selectfont\setlength{\parskip}{0pt}
+    {\fontsize{11}{11.5}\selectfont\setlength{\parskip}{0pt}
     Signs = holdout loading direction (not magnitude); TP2 realigned to
     TP1's orientation where factors recur (ADI/COI,
     PSS-4/ES4A/Discrimination), since BEFA's sign is arbitrary per wave.
     n.s. = not significant.\par}
   \end{block}
 
-  \vspace{-0.3cm}
+  \vspace{-0.7cm}
+  \begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.95\textwidth]{figures/factor_correlation_heatmap.png}
+  \end{figure}
+\end{column}
+
+\separatorcolumn
+
+\begin{column}{\colwidth}
+  \begin{block}{H2 \& H3: 0 of 27 Effects Confirmatory}
+    \vspace{-0.2cm}
+    \textbf{H2}: outcome $\sim$ 4 factors + age + site, simultaneous.
+    \\
+    \textbf{H3}: H2 + each wave's clearest promotive $\times$ adversity
+    interaction.
+
+    \vspace{-0.35cm}
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[width=0.8\textwidth]{figures/h2h3_forest_plot.png}
+    \end{figure}
+  \end{block}
+
+  \vspace{-0.8cm}
+
+  \begin{block}{Supplementary (Not Preregistered): Confounds Explain Only Part of the Pattern}
+    \vspace{-0.2cm}
+    \textbf{Marginal (one-factor-at-a-time) models} -- drop every
+    other factor covariate, keep age/site only:
+
+    \vspace{-0.55cm}
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[width=0.85\textwidth]{figures/marginal_effect_scatter_tp1.png}
+    \end{figure}
+    \vspace{-0.5cm}
+    \begin{itemize}
+      \setlength\itemsep{0.1em}
+      \item TP1's only 2 outcomes tested (SPM-2, MAP-DB) are both
+        caregiver-reported on nearly the same sample ($r=0.437$).
+      \item \textbf{Cross-timepoint check}: shared items are
+        adversity-heavy, fit actually worse across chains and folds.
+      \item \textbf{SES check}: partialling out maternal ed./income
+        (+ site) doesn't shrink ADI/COI's correlation ($-0.69$ to
+        $-0.73$) -- but shrinks breastfeeding/language-exposure's link
+        to them near zero.
+    \end{itemize}
+  \end{block}
+
+  \vspace{-0.6cm}
 
   \begin{block}{Conclusions \& Future Directions}
-    \vspace{-0.2cm}
-    \begin{itemize}
-      \setlength\itemsep{0.15em}
-      \item Neither window's structure reproduced across folds or
-        holdout.
-      \item Absence of evidence for H2/H3 association.
-      \item TP1's factor collinearity limits  independent signal from any one factor.
-      \item ADI/COI (neighborhood-level) correlate only $-0.24$ to
-        $-0.35$ with the household-level items (breastfeeding,
-        language exposure) they'd been bundled with -- distinguishable,
-        not redundant.
-      \item \textbf{Food for thought}: TP1's Early-resources,
-        Nbhd.-safety, and Econ.-hardship factors intercorrelate up to
-        0.96, yet ADI/COI stay distinguishable from household items --
-        mixed evidence for Bronfenbrenner-style nested levels, worth
-        designing a direct test for.
-      \item \textbf{Next step}: cross-wave measurement-invariance test
-        on shared items -- developmental change vs. instrument-switching.
-      \item Revisit as TP2's rolling-enrollment N grows.
-    \end{itemize}
+    \vspace{-0.35cm}
+      \begin{itemize}
+        \setlength\itemsep{0.15em}
+        \item Neither window reproduced -- but ADI/COI's correlation
+          stayed stable ($r=-0.69$ TP1, $-0.70$ TP2).
+        \item Absence of evidence for H2/H3 association.
+        \item TP1's factor collinearity limits independent signal from
+          any one factor.
+        \item \textbf{Food for thought}: neighborhood factors merge
+          ($|r|$ up to 0.96), yet ADI/COI stay distinct from household
+          items (SES check) -- nested (Bronfenbrenner) levels? Next:
+          CFA, nested vs.\ single-factor, on holdout.
+        \item \textbf{Next step}: as HBCD's rolling enrollment grows
+          TP2's N, run a cross-wave measurement-invariance test on
+          shared items to disambiguate developmental change vs.\ instrument-switching.
+      \end{itemize}
   \end{block}
 
   \vspace{-0.3cm}
