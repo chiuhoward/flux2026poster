@@ -148,20 +148,21 @@
 
 \begin{document}
 
-% This adds the Logos on the top left and top right
+% This adds the Logos on the top left and top right.
+% Both nodes anchor to the same page corner type (north-*, which is the same
+% y-coordinate on the page for west and east) with inner sep=3cm.
+
 \addtobeamertemplate{headline}{}
 {
   \begin{tikzpicture}[remember picture,overlay]
-    \node [anchor=north east, inner sep=3cm] at ([xshift=2.25cm,yshift=0.4cm]current page.north east)
+    \node [anchor=north west, inner sep=3cm] at ([xshift=-2.25cm,yshift=0.25cm]current page.north west)
     {\includegraphics[width=6.25cm]{stanford_logos/GSE-hor-logo-white.png}};
   \end{tikzpicture}
 
   \begin{tikzpicture}[remember picture,overlay]
-    \node [anchor=north east, inner sep=3cm] at ([xshift=18.70cm,yshift=1.35cm]current page.north east)
+    \node [anchor=north east, inner sep=3cm] at ([xshift=18.70cm,yshift=2.25cm]current page.north east)
     {\includegraphics[width=36.9cm]{stanford_logos/stanford-line2-10-white.png}};
   \end{tikzpicture}
-
-  % TODO: add an OSF QR code node here (top-left of headline) if wanted
 }
 
 \begin{frame}[t]
@@ -170,19 +171,20 @@
 \separatorcolumn
 
 \begin{column}{\colwidth}
-  \begin{block}{Why study this?}
-    \vspace{-0.1cm}
+  \begin{block}{HBCD's dense, longitudinal sampling lets us test reproducibility of factor structure across time}
+    \vspace{-0.3cm}
     \begin{itemize}
       \setlength\itemsep{0.15em}
-      \item HBCD: multisite, prospective, prenatal through early
-        childhood \supercite{nelsonIntroductionHEALthyBrain2024}.
+      \item Conceptual grounding: DMAP (dimensional model of
+        adversity and psychopathology; threat vs.\ deprivation), unpredictability, 
+        ecological systems theory (Bronfenbrenner), promotive vs.\
+        protective factors.
       \item \textbf{Preregistered battery returned mostly null
-        results.} Extended post-hoc with measures HBCD had actually
-        collected (IBQR, GLED at TP2, ES4A/PSS-4/NBHSAF at TP2) --
-        disclosed as a deviation.
+        results.} Extended post-hoc with additional HBCD-collected
+        measures (see Measures table) -- disclosed as a deviation.
     \end{itemize}
 
-    \vspace{-0.2cm}
+    \vspace{-0.4cm}
     \begin{tcolorbox}[colback=coolgray, colframe=coolgray, width=\linewidth]
       \color{white}
       \textbf{Q1 (H1)}: does a low-dimensional promotive/adversity
@@ -196,15 +198,13 @@
     \end{tcolorbox}
   \end{block}
 
-  \vspace{-0.3cm}
+  \vspace{-0.5cm}
   \begin{block}{Two-stage design: discover, then confirm}
-    \vspace{-0.1cm}
+    \vspace{-0.2cm}
     \begin{itemize}
       \setlength\itemsep{0.15em}
       \item TP1 (prenatal-9mo) and TP2 (9-17mo) modeled independently
-        via Bayesian EFA (BEFA) \supercite{contiBayesianExploratoryFactor2014}
-        \supercite{cudeckCrossValidationCovarianceStructures1983}.
-        Rolling enrollment: TP2 N far smaller.
+        via Bayesian EFA (BEFA). Rolling enrollment: TP2 N far smaller.
     \end{itemize}
 
     \vspace{-1.0cm}
@@ -238,7 +238,7 @@
     \end{tikzpicture}%
     }
     \end{center}
-    \vspace{-0.3cm}
+    \vspace{-0.7cm}
     \begin{itemize}
       \setlength\itemsep{0.15em}
       \item 18 candidate items at TP1, 24 at TP2 (23 active --
@@ -246,10 +246,10 @@
     \end{itemize}
   \end{block}
 
-  \vspace{-0.5cm}
-  \begin{block}{Measures, Visits, and Timepoint Assembly}
+  \vspace{-0.6cm}
+  \begin{block}{Measures, visits, and timepoint assembly}
     \vspace{-0.1cm}
-    \fontsize{10.5}{11}\selectfont
+    \fontsize{9.5}{9.5}\selectfont
     \begin{tabularx}{\linewidth}{X r r r r r}
             \toprule
             & \multicolumn{3}{c}{TP1} & \multicolumn{2}{c}{TP2} \\
@@ -257,8 +257,8 @@
             \textbf{Measure} & \textbf{V01} & \textbf{V02} & \textbf{V03} & \textbf{V04} & \textbf{V05} \\
             \midrule
             Breastfeeding Hist.$^{\dagger *}$ & -- & 2255 & 64 & 9 & -- \\
-            Area Depriv.\ Index$^\dagger$ & 2649 & -- & -- & -- & 577 \\
-            Child Opp.\ Index 2.0$^\dagger$ & 2665 & -- & -- & -- & 580 \\
+            Area Depriv.\ Index (ADI)$^\dagger$ & 2649 & -- & -- & -- & 577 \\
+            Child Opp.\ Index 2.0 (COI)$^\dagger$ & 2665 & -- & -- & -- & 580 \\
             MLDS (lang.\ exposure)$^\dagger$ & -- & -- & 1284 & 636 & -- \\
             Walkability Index$^\dagger$ & 2193 & -- & -- & -- & 467 \\
             Tree canopy cover$^\dagger$ & 2665 & -- & -- & -- & 580 \\
@@ -268,7 +268,7 @@
             Food insecurity$^\dagger$ & -- & 2219 & 1312 & 627 & -- \\
             Transitions-in-Care$^\dagger$ & -- & 1057 & 743 & 521 & 52 \\
             E-HITS & 3395 & 12 & -- & -- & -- \\
-            PhenX Discrim.$^\dagger$ & 3378 & 11 & -- & -- & 371 \\
+            PhenX Discrimination$^\dagger$ & 3378 & 11 & -- & -- & 371 \\
             ecPROMIS CG-Child Rel.$^\dagger$ & -- & -- & 1323 & -- & 28 \\
             PACEs (current) & 3473 & 10 & -- & -- & -- \\
             PROMIS ES4a$^\dagger$ & 3507 & 2202 & 1302 & 629 & -- \\
@@ -289,25 +289,28 @@
 
           \vspace{0.05cm}
           {\fontsize{9}{9.5}\selectfont\setlength{\parskip}{0pt}
-          $^\dagger$ shared across waves (same instrument or
+          $^\dagger$ shared across timepoints (same instrument or
           GLED/PROMIS parallel form). $^*$ excluded at TP2, too sparse
-          ($<$10\% coverage). Outcomes: 3 Bayley subscales, CDI-WG,
-          Vineland-ABC, PROMIS-Peer, SPM-2, MAP-DB. Covariates: site,
-          maternal education/income, age.\par}
+          ($<$10\% coverage). Outcomes: 3 Bayley (cognitive/motor/
+          language) subscales, CDI-WG (vocabulary),
+          Vineland-ABC (adaptive behavior), PROMIS-Peer (peer
+          relations), SPM-2 (sensory processing), MAP-DB (disruptive
+          behavior). Covariates: site, maternal education/income,
+          age.\par}
         \end{block}
       \end{column}
 
 \separatorcolumn
 
 \begin{column}{\colwidth}
-  \begin{block}{H1: Structure Failed to Reproduce}
+  \begin{block}{No consistent factor structure for environmental variables}
 
     \begin{table}[ht]
       \centering
-      \fontsize{12}{13.2}\selectfont
+      \fontsize{13}{13.5}\selectfont
       \begin{tabularx}{\textwidth}{l c c c c}
         \toprule
-        \textbf{Window} & \textbf{Factors (M)} & \textbf{Folds agreeing} & \textbf{CFI (holdout)} & \textbf{RMSEA} \\
+        \textbf{Timepoint} & \textbf{Factors (M)} & \textbf{Folds agreeing} & \textbf{CFI (holdout)} & \textbf{RMSEA} \\
         \midrule
         TP1 & 4 & 3/5 -- \textbf{FAIL} & 0.903 (scaled) & 0.048 \\
         TP2 & 4 & 1/5 -- \textbf{FAIL} & 0.798 & 0.107 \\
@@ -319,46 +322,46 @@
       \setlength\itemsep{0.1em}
       \item Held-out fit: TP1 fails CFI (0.903 vs.\ conventional threshold of 0.95) but clears
         RMSEA (0.048 vs.\ conventional threshold of 0.06); TP2 fails both (0.798, 0.107).
-      \item Adding IBQR, GLED-TP2, and CHAOS post-preregistration changes item grouping but not instability.
+      \item Adding IBQ-R, GLED-TP2, and CHAOS post-preregistration changes item grouping but not instability.
     \end{itemize}
 
     \vspace{-0.7cm}
     \begin{figure}[ht]
       \centering
-      \includegraphics[width=0.95\textwidth]{figures/fold_loading_stability_adicoi_combined.png}
+      \includegraphics[width=0.85\textwidth]{figures/fold_loading_stability_adicoi_combined.png}
     \end{figure}
   \end{block}
 
   \vspace{-0.5cm}
 
-  \begin{block}{Factor Membership Diverges Between Waves}
+  \begin{block}{Factor membership diverges between timepoints}
     \fontsize{12}{13.2}\selectfont
     % Each factor gets the same colored box (same hex, same 35% tint) as
     % its strip in the H2/H3 forest plot -- TP1 and TP2 are independent
     % stacks now (not a joined X X table row-for-row) since most factors
-    % don't have a same-row counterpart in the other wave anyway.
+    % don't have a same-row counterpart in the other timepoint anyway.
     \begin{columns}[t]
       \begin{column}{0.49\linewidth}
         \centering\textbf{TP1}\\[3pt]
         \vspace{-0.3cm}
-        \factorbox{factorEarlyResources}{Early-resources}{COI+, ADI$-$, Breastfeeding+, MLDS$-$ (n.s.)}
+        \factorbox{factorEarlyResources}{Early-resources}{\mbox{COI+}, \mbox{ADI$-$}, \mbox{Breastfeeding+}, \mbox{MLDS$-$ (n.s.)}}
         \vspace{-0.5cm}
-        \factorbox{factorCaregiverStress}{Caregiver-stress}{PACEs+, ES4A+, PSS-4$-$, Discrim.$-$, E-HITS$-$, CCR-Inf+, IBQ-R$-$}
+        \factorbox{factorCaregiverStress}{Caregiver-stress}{\mbox{PACEs+}, \mbox{ES4a+}, \mbox{PSS-4$-$}, \mbox{Discrimination$-$}, \mbox{E-HITS$-$}, \mbox{ecPROMIS+}, \mbox{IBQ-R$-$}}
         \vspace{-0.5cm}
-        \factorbox{factorNbhdSafety}{Nbhd.-safety}{Safety+, Eviction$-$, Tree canopy+}
+        \factorbox{factorNbhdSafety}{Nbhd.-safety}{\mbox{Safety+}, \mbox{Eviction$-$}, \mbox{Tree canopy+}}
         \vspace{-0.5cm}
-        \factorbox{factorEconHardship}{Econ.-hardship}{Hardship+, Food insecurity+}
+        \factorbox{factorEconHardship}{Econ.-hardship}{\mbox{Hardship+}, \mbox{Food insecurity+}}
       \end{column}
       \begin{column}{0.49\linewidth}
         \centering\textbf{TP2}\\[3pt]
         \vspace{-0.3cm}
-        \factorbox{factorEarlyResources}{Early-resources}{COI+, ADI$-$}
+        \factorbox{factorEarlyResources}{Early-resources}{\mbox{COI+}, \mbox{ADI$-$}}
         \vspace{-0.5cm}
-        \factorbox{factorCaregiverStress}{Caregiver-stress}{PSS-4$-$, Discrim.$-$, CHAOS$-$, ES4A+}
+        \factorbox{factorCaregiverStress}{Caregiver-stress}{\mbox{PSS-4$-$}, \mbox{Discrimination$-$}, \mbox{CHAOS$-$}, \mbox{ES4a+}}
         \vspace{-0.5cm}
-        \factorbox{factorHomeEnv}{Home-env./stimulation}{HOME-ES+, HOME-CS+, PACEs(retro)+, Hardship$-$, ScreenQ$-$, Safety (n.s.)}
+        \factorbox{factorHomeEnv}{Home-env./ stimulation}{\mbox{HOME-ES+}, \mbox{HOME-CS+}, \mbox{PACEs(retro)+}, \mbox{Hardship$-$}, \mbox{ScreenQ$-$}, \mbox{Safety (n.s.)}}
         \vspace{-0.5cm}
-        \factorbox{factorTrauma}{Trauma/ abuse-history}{PEARLS+, CASR-SF+, ACEs(adult)+}
+        \factorbox{factorTrauma}{Trauma/ abuse-history}{\mbox{PEARLS+}, \mbox{CASR-SF+}, \mbox{ACEs(adult)+}}
       \end{column}
     \end{columns}
 
@@ -366,37 +369,37 @@
     {\fontsize{11}{11.5}\selectfont\setlength{\parskip}{0pt}
     Signs = holdout loading direction (not magnitude); TP2 realigned to
     TP1's orientation where factors recur (ADI/COI,
-    PSS-4/ES4A/Discrimination), since BEFA's sign is arbitrary per wave.
+    PSS-4/ES4a/Discrimination), since BEFA's sign is arbitrary per timepoint.
     n.s. = not significant.\par}
   \end{block}
 
-  \vspace{-0.7cm}
+  \vspace{-0.75cm}
   \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.95\textwidth]{figures/factor_correlation_heatmap.png}
+    \includegraphics[width=0.85\textwidth]{figures/factor_correlation_heatmap.png}
   \end{figure}
 \end{column}
 
 \separatorcolumn
 
 \begin{column}{\colwidth}
-  \begin{block}{H2 \& H3: 0 of 27 Effects Confirmatory}
+  \begin{block}{Absence of evidence for promotive/adversity--outcome effects}
     \vspace{-0.2cm}
     \textbf{H2}: outcome $\sim$ 4 factors + age + site, simultaneous.
     \\
-    \textbf{H3}: H2 + each wave's clearest promotive $\times$ adversity
+    \textbf{H3}: H2 + each timepoint's clearest promotive $\times$ adversity
     interaction.
 
     \vspace{-0.35cm}
     \begin{figure}[ht]
       \centering
-      \includegraphics[width=0.8\textwidth]{figures/h2h3_forest_plot.png}
+      \includegraphics[width=0.7\textwidth]{figures/h2h3_forest_plot.png}
     \end{figure}
   \end{block}
 
-  \vspace{-0.8cm}
+  \vspace{-0.9cm}
 
-  \begin{block}{Supplementary (Not Preregistered): Confounds Explain Only Part of the Pattern}
+  \begin{block}{TP1's Early-resources factor predicts fewer sensory/temper problems in marginal model}
     \vspace{-0.2cm}
     \textbf{Marginal (one-factor-at-a-time) models} -- drop every
     other factor covariate, keep age/site only:
@@ -404,29 +407,33 @@
     \vspace{-0.55cm}
     \begin{figure}[ht]
       \centering
-      \includegraphics[width=0.85\textwidth]{figures/marginal_effect_scatter_tp1.png}
+      \includegraphics[width=0.75\textwidth]{figures/marginal_effect_scatter_tp1.png}
     \end{figure}
     \vspace{-0.5cm}
     \begin{itemize}
       \setlength\itemsep{0.1em}
-      \item TP1's only 2 outcomes tested (SPM-2, MAP-DB) are both
-        caregiver-reported on nearly the same sample ($r=0.437$).
+      \item \textbf{The signal}: tested alone, this factor predicts
+        fewer sensory-processing (SPM-2, $-0.155$) and temper-loss
+        (MAP-DB, $-0.151$) problems.
+      \item \textbf{Confounds explain only part of the signal}: TP1's
+        only 2 outcomes are both caregiver-reported on nearly
+        the same sample ($r=0.437$).
       \item \textbf{Cross-timepoint check}: shared items are
-        adversity-heavy, fit actually worse across chains and folds.
+        adversity-heavy, model fit actually worse across chains and folds.
       \item \textbf{SES check}: partialling out maternal ed./income
         (+ site) doesn't shrink ADI/COI's correlation ($-0.69$ to
-        $-0.73$) -- but shrinks breastfeeding/language-exposure's link
-        to them near zero.
+        $-0.73$) -- but shrinks breastfeeding/ language exposure's link
+        to outcomes near zero.
     \end{itemize}
   \end{block}
 
   \vspace{-0.6cm}
 
-  \begin{block}{Conclusions \& Future Directions}
+  \begin{block}{Conclusions \& future directions}
     \vspace{-0.35cm}
       \begin{itemize}
         \setlength\itemsep{0.15em}
-        \item Neither window reproduced -- but ADI/COI's correlation
+        \item Neither timepoint reproduced -- but ADI/COI's correlation
           stayed stable ($r=-0.69$ TP1, $-0.70$ TP2).
         \item Absence of evidence for H2/H3 association.
         \item TP1's factor collinearity limits independent signal from
@@ -436,7 +443,7 @@
           items (SES check) -- nested (Bronfenbrenner) levels? Next:
           CFA, nested vs.\ single-factor, on holdout.
         \item \textbf{Next step}: as HBCD's rolling enrollment grows
-          TP2's N, run a cross-wave measurement-invariance test on
+          TP2's N, run a cross-timepoint measurement-invariance test on
           shared items to disambiguate developmental change vs.\ instrument-switching.
       \end{itemize}
   \end{block}
